@@ -26,10 +26,9 @@ def splinter2(browser):
     browser.find_element_by_id("passwd").clear()
     browser.find_element_by_id('passwd').send_keys('your password')
 
-    for i in range(0, 5):
-        contents = browser.find_element_by_class_name("WB_btn_login")
-        if contents:
-            contents.click()
+    contents = browser.find_element_by_class_name("WB_btn_login")
+    if contents:
+        contents.click()
 
 def splinter(url):
 
