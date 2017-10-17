@@ -4,6 +4,29 @@ from splinter.browser import Browser
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 
+def splinterQQUserPwd(browser):
+    print 'hey 1'
+    #browser.find_element_by_id("uin_tips").clear()
+    print 'hey 2'
+    browser.find_element_by_id("uin_tips").send_keys("1729992134")
+    print 'hey 3'
+    #browser.find_element_by_id("p").clear()
+    print 'hey 4'
+    browser.find_element_by_id('p').send_keys('CV0016700')
+
+    i = 0
+    while i < 5:
+        try:
+            time.sleep(3)
+            contents = browser.find_element_by_class_name("login_button")
+            if contents:
+                contents.click()
+                i = i+1
+            else:
+                break
+        except Exception as err:
+            break
+
 def splinter2(browser):
     browser.find_element_by_id("userId").clear()
     browser.find_element_by_id("userId").send_keys("name")
@@ -63,21 +86,23 @@ def splinterQQ(url):
                 time.sleep(3)
                 break
 
-        browser.get(
-            'https://graph.qq.com/oauth/show?which=Login&display=pc&response_type=code&client_id=101289788&redirect_uri=http%3A%2F%2Fwww.huajiao.com%2Fapi%2Factive&state=eyJzb3VyY2UiOiJxcSIsInJlZGlyZWN0IjoiaHR0cDpcL1wvd3d3Lmh1YWppYW8uY29tXC8/aHJkMzY3NCIsInVzZXJfcmFuZCI6ImYzN2U0N2EzMjIxMDJhY2RiYTM1MTk2YjY0ODhlYjA4IiwiYmFuanVtcCI6IiJ9')
-        time.sleep(3)
+        #browser.get(
+        #    'https://graph.qq.com/oauth/show?which=Login&display=pc&response_type=code&client_id=101289788&redirect_uri=http%3A%2F%2Fwww.huajiao.com%2Fapi%2Factive&state=eyJzb3VyY2UiOiJxcSIsInJlZGlyZWN0IjoiaHR0cDpcL1wvd3d3Lmh1YWppYW8uY29tXC8/aHJkMzY3NCIsInVzZXJfcmFuZCI6ImYzN2U0N2EzMjIxMDJhY2RiYTM1MTk2YjY0ODhlYjA4IiwiYmFuanVtcCI6IiJ9')
+        #time.sleep(3)
 
         while True:
             try:
                 print 'try new 1'
+                browser.switch_to.frame("ptlogin_iframe")
                 contents3 = browser.find_element_by_id("switcher_plogin")
                 print 'try new 2'
                 if contents3:
                     print 'try new 3'
                     contents3.click()
+                    splinterQQUserPwd(browser);
                     break
             except Exception as err:
-                print '!!!not found'
+                print err
             time.sleep(1)
 
 
@@ -119,4 +144,4 @@ def splinterOld(url):
 if __name__ == '__main__':
     websize3 = 'http://www.huajiao.com/'
     #splinterWeibo(websize3)
-    splinter(websize3)
+    splinterQQ(websize3)
